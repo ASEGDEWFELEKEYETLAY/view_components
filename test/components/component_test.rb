@@ -7,6 +7,8 @@ class PrimerComponentTest < Minitest::Test
 
   # Components with any arguments necessary to make them render
   COMPONENTS_WITH_ARGS = [
+    [Primer::Beta::IconButton, { icon: :star, "aria-label": "Star" }],
+    [Primer::Beta::Button, {}],
     [Primer::Alpha::Layout, {}, proc { |component|
       component.main(tag: :div) { "Foo" }
       component.sidebar(tag: :div) { "Bar" }
@@ -48,6 +50,14 @@ class PrimerComponentTest < Minitest::Test
       component.summary { "Foo" }
       component.body { "Bar" }
     end],
+    [Primer::Alpha::Dialog, { title: "Test" }, proc { |component|
+      component.header { "Foo" }
+      component.body { "Foo" }
+      component.footer { "Foo" }
+    }],
+    [Primer::Alpha::Dialog::Header, { title: "Test", id: "test" }],
+    [Primer::Alpha::Dialog::Body, {}],
+    [Primer::Alpha::Dialog::Footer, {}],
     [Primer::Dropdown, {}, lambda do |component|
       component.button { "Foo" }
       component.menu do |m|
@@ -74,6 +84,7 @@ class PrimerComponentTest < Minitest::Test
     [Primer::StateComponent, { title: "Open" }],
     [Primer::SubheadComponent, { heading: "Foo" }, proc { |component| component.heading { "Foo" } }],
     [Primer::TabContainerComponent, {}, proc { "Foo" }],
+    [Primer::Alpha::ToggleSwitch, {}],
     [Primer::Alpha::TextField, { name: :foo, label: "Foo" }],
     [Primer::Beta::Text, {}],
     [Primer::Truncate, {}],
@@ -89,18 +100,18 @@ class PrimerComponentTest < Minitest::Test
     ignored_components = [
       "Primer::HiddenTextExpander",
       "Primer::HeadingComponent",
-      "Primer::ButtonGroup",
       "Primer::CloseButton",
       "Primer::CounterComponent",
       "Primer::DetailsComponent",
       "Primer::Component",
       "Primer::OcticonsSymbolComponent",
       "Primer::Content",
-      "Primer::BorderBoxComponent",
-      "Primer::BoxComponent"
+      "Primer::BoxComponent",
+      "Primer::BaseButton",
+      "Primer::ButtonGroup"
     ]
 
-    primer_component_files_count = Dir["app/components/**/*.rb"].count
+    primer_component_files_count = Dir["app/components/**/*.rb"].count { |p| p.exclude?("/experimental/") }
     assert_equal primer_component_files_count, COMPONENTS_WITH_ARGS.length + ignored_components.count, "Primer component added. Please update this test with an entry for your new component <3"
   end
 
