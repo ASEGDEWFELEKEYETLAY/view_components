@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.0.95
+
+### Patch Changes
+
+- [#1372](https://github.com/primer/view_components/pull/1372) [`98155b10`](https://github.com/primer/view_components/commit/98155b10599d3b1753c32b7c247acadff926eaa4) Thanks [@jonrohan](https://github.com/jonrohan)! - Delete the deprecated Primer::ButtonGroup component
+
+* [#1371](https://github.com/primer/view_components/pull/1371) [`d0ddcce0`](https://github.com/primer/view_components/commit/d0ddcce0fbb4b46b1746e5688b23c54e1ba74f12) Thanks [@jonrohan](https://github.com/jonrohan)! - Delete the deprecated Primer::BaseButton component
+
 ## 0.0.94
 
 ### Patch Changes
